@@ -7,6 +7,7 @@ from core import callbacks
 def middleware_dispatchers(dispatcher):
     middleware_list = [
         middlewares.session_bot(dispatcher),
+        middlewares.scheduler_bot(dispatcher),
     ]
 
     return [middleware for middleware in middleware_list]

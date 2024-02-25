@@ -2,7 +2,7 @@ import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher, types
-from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.fsm.storage.redis import RedisStorage
 
 from core.commands.commands import commands
 from core.scheduler.tasks import scheduler_tasks
@@ -18,8 +18,11 @@ async def main() -> None:
 
     # Start Polling Bot
     try:
+        # Redis Storage
+        storage = RedisStorage.from_url('redis://localhost:6379/0')
+
         # Create Dispatcher
-        dispatcher = Dispatcher(storage=MemoryStorage())
+        dispatcher = Dispatcher(storage=storage)
 
         dispatchers.all_dispatchers(dispatcher)
 
@@ -28,7 +31,7 @@ async def main() -> None:
         scheduler.start()
 
         await bot.delete_webhook(drop_pending_updates=True)
-        # await bot.delete_my_commands(scope=types.BotCommandScopeDefault())
+        await bot.delete_my_commands(scope=types.BotCommandScopeDefault())
         await bot.set_my_commands(commands=commands, scope=types.BotCommandScopeDefault())
         await dispatcher.start_polling(bot)
     finally:

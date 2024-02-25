@@ -1,14 +1,22 @@
 __all__ = [
-    'session_bot'
+    'session_bot', 'scheduler_bot',
     ]
 
 
 from aiogram import Router
 
 from core.database.engine import async_session
+from core.scheduler.tasks import scheduler_tasks
 from core.middlewares.database import DataBaseSession
+from core.middlewares.scheduler import Scheduler
 
 
-# Start bot
+scheduler = scheduler_tasks()
+
+
 def session_bot(router: Router) -> None:
     router.message.middleware.register(DataBaseSession(session_pool=async_session))
+
+
+def scheduler_bot(router: Router) -> None:
+    router.message.middleware.register(Scheduler(scheduler=scheduler))
