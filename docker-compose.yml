@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  bot:
+    build: ./
+    container_name: telebot
+    working_dir: /telebot
+    command: python bot.py
+    volumes:
+      - ./core:/telebot/core
+      - ./bot.py:/telebot/bot.py
+      - ./requirements.txt:/telebot/requirements.txt
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:16.2
+    container_name: telebot_postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data:rw
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+
+  redis:
+    image: redis:alpine
+    container_name: telebot_redis
+    command:
+      - redis-server
+    restart: always
+    ports:
+      - "6379:6379"
+    env_file:
+      .env
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: telebot_pgadmin
+    restart: always
+    ports:
+      - "5050:80"
+    env_file:
+      .env
+
+volumes:
+  pg_data: { }
