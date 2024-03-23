@@ -1,6 +1,6 @@
 from aiogram import types
 
-from core.callbacks.data import ProductInfo
+from core.views.callbacks.data import ProductInfo
 
 
 async def product(callback: types.CallbackQuery, callback_data: ProductInfo):

@@ -1,6 +1,4 @@
-from core import middlewares
-from core import handlers
-from core import callbacks
+from core.views import callbacks, handlers, middlewares
 
 
 # Middlewares

@@ -1,7 +1,7 @@
 from aiogram import Bot, Dispatcher
 
 from core.database.engine import create_db, drop_db
-from core.utils.environments import envs
+from core.settings.environments import envs
 
 
 async def start(bot: Bot) -> None:

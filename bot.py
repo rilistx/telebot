@@ -6,8 +6,7 @@ from aiogram.fsm.storage.redis import RedisStorage
 
 from core.commands.commands import commands
 from core.scheduler.tasks import scheduler_tasks
-from core.utils import dispatchers, environments
-
+from core.settings import dispatchers, environments
 
 bot = Bot(token=environments.envs['bot_token'], parse_mode='HTML')
 

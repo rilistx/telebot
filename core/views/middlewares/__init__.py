@@ -7,8 +7,8 @@ from aiogram import Router
 
 from core.database.engine import async_session
 from core.scheduler.tasks import scheduler_tasks
-from core.middlewares.database import DataBaseSession
-from core.middlewares.scheduler import Scheduler
+from core.views.middlewares.database import DataBaseSession
+from core.views.middlewares.scheduler import Scheduler
 
 
 scheduler = scheduler_tasks()

@@ -5,8 +5,8 @@ __all__ = [
 
 from aiogram import Router, F
 
-from core.callbacks.products import product
-from core.callbacks.data import ProductInfo
+from core.views.callbacks.products import product
+from core.views.callbacks.data import ProductInfo
 
 
 def callback_bot(router: Router) -> None:

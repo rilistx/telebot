@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 
 from core.database.models import Base
-from core.utils.environments import envs
+from core.settings.environments import envs
 
 
 DataBaseURL = f"postgresql+asyncpg://{envs['db_user']}:{envs['db_pass']}@{envs['db_host']}/{envs['db_name']}"
